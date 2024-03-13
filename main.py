@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QComboBox, QVBoxLayout
 import PyQt5
 import os,re
 from PyQt5.QtCore import Qt
+
 def partition_list():
     regex = r"([^\\s]*:)"
     driver = os.popen("wmic logicaldisk get name").read()
