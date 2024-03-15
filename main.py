@@ -77,9 +77,10 @@ def scan_button():
             count = count + 1
         count = 0
 def move():
+    linked = []
     global all_files
     moved_path = path_select.currentText()
-    print(moved_path)
+    # print(moved_path)
     for new in range(path.count()):
         # print(new)
         itemm = path.item(new)
@@ -89,7 +90,7 @@ def move():
         else:
             # print(all_files[new])
             new_path_one_with_new_drive_added =str(moved_path) +(str(all_files[new]))[1:]
-            print(new_path_one_with_new_drive_added)
+            # print(new_path_one_with_new_drive_added)
 
             def remove_last_element(path):
                 # Split the path into a list of elements
@@ -99,9 +100,11 @@ def move():
                 # Join the elements back into a path
                 directory_path = os.sep.join(path_elements)
                 return directory_path
-            parent_path_with_new_drive_added = remove_last_element(new_path_one_with_new_drive_added)
-            parent_path_old = remove_last_element(str(all_files[new]))
-            command = f"mklink /D {parent_path_with_new_drive_added} {parent_path_old}"
+            parent_path_with_new_drive_added = remove_last_element(new_path_one_with_new_drive_added) # useless
+            parent_path_old = remove_last_element(str(all_files[new])) # useless
+            command = f"mklink /D {new_path_one_with_new_drive_added} \"{(str(all_files[new]))}\""
+            os.system(command)
+            print(command)
             pass
         # if PyQt5.QtWidgets.QListWidgetItem(new).checkState() == Qt.Checked:
         #     print(new)
