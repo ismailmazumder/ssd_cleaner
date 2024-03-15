@@ -21,7 +21,7 @@ def partition_list():
     return partition_list
 def file_list(drive):
     user_name = os.getlogin()
-    path = f"{drive}:\\Users\\{user_name}\\AppData\\)"
+    path = f"{drive}:\\Users\\{user_name}\\AppData\\"
 
     def convert_bytes_to_gb(bytes):
         gb = bytes / (1024 ** 3)  # 1024 bytes = 1 kilobyte, 1024 kilobytes = 1 megabyte, 1024 megabytes = 1 gigabyte
