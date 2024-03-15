@@ -102,7 +102,7 @@ def move():
                 return directory_path
             parent_path_with_new_drive_added = remove_last_element(new_path_one_with_new_drive_added) # useless
             parent_path_old = remove_last_element(str(all_files[new])) # useless
-            command = f"mklink /D {new_path_one_with_new_drive_added} \"{(str(all_files[new]))}\""
+            command = f"mklink /H {new_path_one_with_new_drive_added} \"{(str(all_files[new]))}\""
             os.system(command)
             print(command)
             pass
