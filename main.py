@@ -20,7 +20,7 @@ def partition_list():
     return partition_list
 def file_list(drive):
     user_name = os.getlogin()
-    path = f"{drive}:\\Users\\{user_name}\\AppData\\test"
+    path = f"{drive}:\\Users\\{user_name}\\AppData\\)"
 
     def convert_bytes_to_gb(bytes):
         gb = bytes / (1024 ** 3)  # 1024 bytes = 1 kilobyte, 1024 kilobytes = 1 megabyte, 1024 megabytes = 1 gigabyte
@@ -104,10 +104,14 @@ def move():
             parent_path_old = remove_last_element(str(all_files[new])) # useless
             try:
                 os.mkdir(parent_path_with_new_drive_added)
+
+            except:
+                print("failed MKDIR")
+                pass
+            try:
                 os.system(f"move /y {str(all_files[new])} {new_path_one_with_new_drive_added}")
             except:
-                print("failed")
-                pass
+                print("failed move")
             command = f"mklink \"{new_path_one_with_new_drive_added}\" \"{(str(all_files[new]))}\""
             os.system(command)
             print(command)
@@ -147,6 +151,9 @@ move_button.clicked.connect(move)
 path_select = PyQt5.QtWidgets.QComboBox()
 path_select.addItem("Select Your New Drive")
 path_select.addItems(drives)
+# scrool
+path.verticalScrollBar().valueChanged.connect(size.verticalScrollBar().setValue)
+size.verticalScrollBar().valueChanged.connect(path.verticalScrollBar().setValue)
 # Layout setup (for better organization)
 layout = QVBoxLayout()
 
