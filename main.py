@@ -11,12 +11,13 @@ import concurrent.futures
 from threading import Thread
 n=0
 lennn = 0
-def partition_list():
+def partition_list_():
     regex = r"([^\\s]*:)"
     driver = os.popen("wmic logicaldisk get name").read()
     drives = re.findall(regex, driver)
 
     partition_list = [partition.strip() for drive in drives for partition in drive.split(":") if partition.strip()]
+    print(partition_list)
     partition_list[0] = partition_list[0].strip("Name  \n\n")
     return partition_list
 def file_list(drive):
@@ -106,11 +107,12 @@ def move():
             try:
                 time.sleep(1)
                 print(parent_path_with_new_drive_added)
+                print(parent_path_old,"parent old")
                 os.mkdir(parent_path_with_new_drive_added)
 
-            except:
+            except Exception as e:
 
-                print("failed MKDIR")
+                print("failed MKDIR",e)
                 os.system(f"mkdir \"{parent_path_with_new_drive_added}\" ")
                 pass
             try:
@@ -139,7 +141,7 @@ window.setGeometry(100, 100, 300, 200)
 
 my_combobox = QComboBox()
 my_combobox.addItem("Select Your Drive")
-drives = partition_list()
+drives = partition_list_()
 my_combobox.addItems(drives)
 scan = PyQt5.QtWidgets.QPushButton("Scan")
 scan.clicked.connect(scan_button)
